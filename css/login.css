@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+h1 {
+  color: #10b981;
+}
+
+body {
+  background: linear-gradient(135deg, #e6f7f1, #dff3ec);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  width: 380px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.logo {
+  width: 90px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.input-group {
+  background: #f3f4f6;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.input-group input {
+  border: none;
+  background: none;
+  width: 100%;
+  outline: none;
+}
+
+.input-group.password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#togglePassword {
+  cursor: pointer;
+}
+
+.forgot {
+  display: block;
+  text-align: right;
+  font-size: 13px;
+  color: #10b981;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(90deg, #10b981, #059669);
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #059669, #10b981);
+}
+
+.register {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.register a {
+  color: #10b981;
+  font-weight: 600;
+  text-decoration: none;
+}
