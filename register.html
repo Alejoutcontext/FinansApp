@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro - Vuelve a Casa</title>
+  <link rel="stylesheet" href="/FinansApp/css/styles.css">
+</head>
+
+<body>
+
+<div class="login-container">
+  <img src="/FinansApp/assets/logo.png" alt="Vuelve a Casa" class="logo">
+
+  <h1>Crear cuenta</h1>
+  <p class="subtitle">
+    Únete para ayudar a reencontrar personas desaparecidas
+  </p>
+
+  <!-- IMPORTANTE: ID agregado -->
+  <form id="registerForm">
+
+    <label>Nombre completo</label>
+    <input type="text" placeholder="Tu nombre" required>
+
+    <label>Correo electrónico</label>
+    <input type="email" placeholder="correo@ejemplo.com" required>
+
+    <label>Contraseña</label>
+    <div class="password-field">
+      <input type="password" placeholder="••••••••" required>
+      <span class="toggle-eye">👁️</span>
+    </div>
+
+    <label>Confirmar contraseña</label>
+    <div class="password-field">
+      <input type="password" placeholder="••••••••" required>
+      <span class="toggle-eye">👁️</span>
+    </div>
+
+    <div class="terms">
+      <input type="checkbox" required>
+      <span>
+        Acepto los <a href="#">términos</a> y la
+        <a href="#">política de privacidad</a>
+      </span>
+    </div>
+
+    <button type="submit">Crear cuenta</button>
+
+  </form>
+
+  <p class="register">
+    ¿Ya tienes cuenta?
+    <a href="login.html">Iniciar sesión</a>
+  </p>
+</div>
+
+<!-- CONEXIÓN CON JS -->
+<script src="js/main.js"></script>
+
+</body>
+</html>

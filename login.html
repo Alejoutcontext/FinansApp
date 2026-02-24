@@ -2,45 +2,51 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>FinansApp</title>
-  <link rel="stylesheet" href="css/login.css">
-  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
-  <link rel="shortcut icon" href="/assets/logo.png" type="image/x-icon">
+  <title>Iniciar sesión | Vuelve a Casa</title>
+  <link rel="stylesheet" href="/FinansApp/css/login.css">
 </head>
 <body>
 
-  <div class="container">
-    <div class="card">
+  <div class="login-container">
 
-    <img src="assets/logo.png" alt="FinansApp Logo" class="logo">
+    <div class="login-card">
+      <img src="/FinansApp/assets/logo.png" alt="Vuelve a Casa" class="logo">
 
-      <h1>FinansApp</h1>
-      <p class="subtitle">Organiza tu dinero de forma inteligente</p>
-    
-      <form id="loginForm">
-
-        <label>Correo electrónico</label>
-        <div class="input-group">
-          <input type="email" placeholder="correo@email.com" required>
-        </div>
-
-        <label>Contraseña</label>
-        <div class="input-group password">
-          <input type="password" id="password" placeholder="••••••••" required>
-          <i class="fi fi-sr-eye"></i>
-        </div>
-
-        <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
-
-        <button type="submit">Iniciar sesión →</button>
-
-      </form>
-
-      <p class="register">
-        ¿No tienes cuenta? <a href="#">Registrarse</a>
+      <h1>Vuelve a Casa</h1>
+      <p class="subtitle">
+        Ayudamos a reunir familias
       </p>
 
+      <form id="loginForm">
+
+  <label>Correo electrónico</label>
+  <input type="email" id="email" placeholder="tu@email.com">
+
+  <label>Contraseña</label>
+  <div class="password-field">
+    <input type="password" id="password" placeholder="********">
+    <span id="togglePassword">👁️</span>
+  </div>
+
+  <div id="message" class="message"></div>
+
+  <button type="submit" id="loginBtn">
+    Iniciar sesión
+  </button>
+
+</form>
+
+
+      <div class="extra">
+        <a href="#">¿Olvidaste tu contraseña?</a>
+        <p class="register">
+       ¿No tienes cuenta?
+      <a href="/FinansApp/register.html">Regístrate</a>
+  </p>
+
+      </div>
     </div>
+
   </div>
 
   <script src="js/login.js"></script>
