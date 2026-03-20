@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nueva contraseña | Vuelve a Casa</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/recover.css">
+</head>
+
+<body class="auth-bg">
+  <div class="auth-wrapper">
+    <div class="login-card">
+
+      <img src="assets/logo.png" alt="Vuelve a Casa" class="logo">
+      <h1 class="auth-title">Ingresa tu código</h1>
+      <p class="subtitle" id="resetSubtitle">
+        Ingresa el código de 6 dígitos y tu nueva contraseña
+      </p>
+
+      <form id="resetForm" class="auth-form" novalidate>
+
+        <!-- CÓDIGO DE 6 DÍGITOS -->
+        <div class="auth-group">
+          <label class="auth-label">
+            Código de verificación <span class="required">*</span>
+          </label>
+          <div class="code-inputs">
+            <input type="text" class="code-digit" maxlength="1" inputmode="numeric">
+            <input type="text" class="code-digit" maxlength="1" inputmode="numeric">
+            <input type="text" class="code-digit" maxlength="1" inputmode="numeric">
+            <input type="text" class="code-digit" maxlength="1" inputmode="numeric">
+            <input type="text" class="code-digit" maxlength="1" inputmode="numeric">
+            <input type="text" class="code-digit" maxlength="1" inputmode="numeric">
+          </div>
+          <input type="hidden" id="codigoCompleto">
+          <small id="codeHelp" class="help-text"></small>
+        </div>
+
+        <!-- NUEVA CONTRASEÑA -->
+        <div class="auth-group">
+          <label for="newPassword" class="auth-label">
+            Nueva contraseña <span class="required">*</span>
+          </label>
+          <div class="password-field">
+            <input
+              type="password"
+              id="newPassword"
+              class="auth-input auth-input--password"
+              placeholder="Mínimo 6 caracteres"
+              required
+            >
+            <span class="toggle-eye">👁️</span>
+          </div>
+          <div class="password-strength">
+            <div id="strengthBar" class="strength-bar"></div>
+          </div>
+          <small id="strengthText" class="help-text"></small>
+        </div>
+
+        <!-- CONFIRMAR CONTRASEÑA -->
+        <div class="auth-group">
+          <label for="newPassword2" class="auth-label">
+            Confirmar contraseña <span class="required">*</span>
+          </label>
+          <div class="password-field">
+            <input
+              type="password"
+              id="newPassword2"
+              class="auth-input auth-input--password"
+              placeholder="Repite tu nueva contraseña"
+              required
+            >
+            <span class="toggle-eye">👁️</span>
+          </div>
+          <small id="matchText" class="help-text"></small>
+        </div>
+
+        <!-- REENVIAR CÓDIGO -->
+        <div class="resend-wrap">
+          <span>¿No recibiste el código?</span>
+          <button type="button" id="resendBtn" class="resend-btn" disabled>
+            Reenviar en <span id="resendTimer">60</span>s
+          </button>
+        </div>
+
+        <!-- MENSAJE -->
+        <div id="resetMessage" class="message"></div>
+
+        <button type="submit" id="resetBtn" class="auth-btn-primary">
+          Cambiar contraseña
+        </button>
+
+      </form>
+
+      <p class="register" style="margin-top:1.2rem;">
+        <a href="recover.html" class="auth-footer-link">← Cambiar método</a>
+      </p>
+
+    </div>
+  </div>
+
+  <script src="js/recover.js"></script>
+</body>
+</html>

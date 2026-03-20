@@ -2,61 +2,201 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Registro - Vuelve a Casa</title>
-  <link rel="stylesheet" href="/FinansApp/css/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro | Vuelve a Casa</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body>
+<body class="auth-bg">
+  <div class="auth-wrapper">
+    <div class="login-card">
 
-<div class="login-container">
-  <img src="/FinansApp/assets/logo.png" alt="Vuelve a Casa" class="logo">
+      <!-- CABECERA -->
+      <img src="assets/logo.png" alt="Vuelve a Casa" class="logo">
+      <h1 class="auth-title">Crear cuenta</h1>
+      <p class="subtitle">Únete para ayudar a reencontrar personas desaparecidas</p>
 
-  <h1>Crear cuenta</h1>
-  <p class="subtitle">
-    Únete para ayudar a reencontrar personas desaparecidas
-  </p>
+      <form id="registerForm" class="auth-form" novalidate>
 
-  <!-- IMPORTANTE: ID agregado -->
-  <form id="registerForm">
+        <!-- TIPO DOCUMENTO -->
+        <div class="auth-group">
+          <label for="docType" class="auth-label">
+            Tipo de documento <span class="required">*</span>
+          </label>
+          <select id="docType" class="auth-select" required>
+            <option value="">Selecciona tu documento...</option>
+            <option value="CC">Cédula de Ciudadanía (CC)</option>
+            <option value="CE">Cédula de Extranjería (CE)</option>
+            <option value="TI">Tarjeta de Identidad (TI)</option>
+            <option value="PP">Pasaporte (PP)</option>
+            <option value="NU">NUIP</option>
+          </select>
+        </div>
 
-    <label>Nombre completo</label>
-    <input type="text" placeholder="Tu nombre" required>
+        <!-- NÚMERO DOCUMENTO -->
+        <div class="auth-group">
+          <label for="docNumber" class="auth-label">
+            Número de documento <span class="required">*</span>
+          </label>
+          <div class="input-verify-wrap">
+            <input
+              type="text"
+              id="docNumber"
+              class="auth-input"
+              placeholder="Ej: 1234567890"
+              maxlength="20"
+              autocomplete="off"
+              required
+            >
+            <span id="docStatus" class="doc-status"></span>
+          </div>
+          <small id="docHelp" class="help-text">Selecciona primero el tipo de documento</small>
+        </div>
 
-    <label>Correo electrónico</label>
-    <input type="email" placeholder="correo@ejemplo.com" required>
+        <!-- NOMBRE -->
+        <div class="auth-group">
+          <label for="regName" class="auth-label">
+            Nombre completo <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="regName"
+            class="auth-input"
+            placeholder="Juan Pérez González"
+            required
+          >
+        </div>
 
-    <label>Contraseña</label>
-    <div class="password-field">
-      <input type="password" placeholder="••••••••" required>
-      <span class="toggle-eye">👁️</span>
+        <!-- CORREO - OBLIGATORIO -->
+        <div class="auth-group">
+          <label for="regEmail" class="auth-label">
+            Correo electrónico <span class="required">*</span>
+          </label>
+          <input
+            type="email"
+            id="regEmail"
+            class="auth-input"
+            placeholder="juan@email.com"
+            autocomplete="email"
+            required
+          >
+          <small class="help-text">
+            📧 Se enviará un correo de verificación para activar tu cuenta
+          </small>
+        </div>
+
+        <!-- TELÉFONO - OBLIGATORIO (recuperación) -->
+        <div class="auth-group">
+          <label for="phone" class="auth-label">
+            Teléfono / WhatsApp <span class="required">*</span>
+          </label>
+          <div class="phone-wrap">
+            <!-- Prefijo país -->
+            <select id="phonePrefix" class="auth-select auth-select--prefix">
+              <option value="+57">🇨🇴 +57</option>
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+34">🇪🇸 +34</option>
+              <option value="+52">🇲🇽 +52</option>
+              <option value="+58">🇻🇪 +58</option>
+              <option value="+51">🇵🇪 +51</option>
+              <option value="+54">🇦🇷 +54</option>
+            </select>
+            <input
+              type="tel"
+              id="phone"
+              class="auth-input auth-input--phone"
+              placeholder="300 123 4567"
+              maxlength="15"
+              required
+            >
+          </div>
+          <small class="help-text">
+            📱 Obligatorio junto al correo para recuperar tu contraseña
+          </small>
+        </div>
+
+        <!-- AVISO recuperación -->
+        <div class="recovery-notice">
+          <span class="notice-icon">🔐</span>
+          <span>
+            Tu <strong>correo</strong> y <strong>teléfono</strong> son tus métodos 
+            de recuperación de cuenta. Asegúrate de que sean correctos.
+          </span>
+        </div>
+
+        <!-- CONTRASEÑA -->
+        <div class="auth-group">
+          <label for="regPassword" class="auth-label">
+            Contraseña <span class="required">*</span>
+          </label>
+          <div class="password-field">
+            <input
+              type="password"
+              id="regPassword"
+              class="auth-input auth-input--password"
+              placeholder="Mínimo 6 caracteres"
+              required
+              minlength="6"
+            >
+            <span class="toggle-eye">👁️</span>
+          </div>
+          <div class="password-strength">
+            <div id="strengthBar" class="strength-bar"></div>
+          </div>
+          <small id="strengthText" class="help-text"></small>
+        </div>
+
+        <!-- CONFIRMAR CONTRASEÑA -->
+        <div class="auth-group">
+          <label for="regPassword2" class="auth-label">
+            Confirmar contraseña <span class="required">*</span>
+          </label>
+          <div class="password-field">
+            <input
+              type="password"
+              id="regPassword2"
+              class="auth-input auth-input--password"
+              placeholder="Repite tu contraseña"
+              required
+            >
+            <span class="toggle-eye">👁️</span>
+          </div>
+          <small id="matchText" class="help-text"></small>
+        </div>
+
+        <!-- MENSAJE GLOBAL -->
+        <div id="formMessage" class="message"></div>
+
+        <!-- TÉRMINOS -->
+        <div class="terms">
+          <input type="checkbox" id="terms" required>
+          <label for="terms">
+            Acepto los <a href="#">términos</a>,
+            <a href="#">política de privacidad</a> y autorizo el
+            tratamiento de mis datos según la <a href="#">Ley 1581</a>.
+          </label>
+        </div>
+
+        <!-- BOTÓN -->
+        <button type="submit" id="registerBtn" class="auth-btn-primary">
+          Crear cuenta verificada
+        </button>
+
+      </form>
+
+      <p class="register" style="margin-top:1.2rem;">
+        ¿Ya tienes cuenta?
+        <a href="login.html" class="auth-footer-link">Iniciar sesión</a>
+      </p>
+
     </div>
+  </div>
 
-    <label>Confirmar contraseña</label>
-    <div class="password-field">
-      <input type="password" placeholder="••••••••" required>
-      <span class="toggle-eye">👁️</span>
-    </div>
-
-    <div class="terms">
-      <input type="checkbox" required>
-      <span>
-        Acepto los <a href="#">términos</a> y la
-        <a href="#">política de privacidad</a>
-      </span>
-    </div>
-
-    <button type="submit">Crear cuenta</button>
-
-  </form>
-
-  <p class="register">
-    ¿Ya tienes cuenta?
-    <a href="/FinansApp/login.html">Iniciar sesión</a>
-  </p>
-</div>
-
-<!-- CONEXIÓN CON JS -->
-<script src="/FinansApp/js/main.js"></script>
-
+  <script src="js/register.js"></script>
 </body>
 </html>

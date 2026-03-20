@@ -3,50 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <title>Iniciar sesión | Vuelve a Casa</title>
-  <link rel="stylesheet" href="/FinansApp/css/login.css">
+
+  <!-- Fuente moderna -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/login.css">
 </head>
-<body>
+<body class="auth-bg">
 
-  <div class="login-container">
-
+  <div class="auth-wrapper">
     <div class="login-card">
-      <img src="/FinansApp/assets/logo.png" alt="Vuelve a Casa" class="logo">
+      <img src="assets/logo.png" alt="Vuelve a Casa" class="logo">
 
-      <h1>Vuelve a Casa</h1>
-      <p class="subtitle">
-        Ayudamos a reunir familias
-      </p>
+      <h1 class="auth-title">Vuelve a Casa</h1>
+      <p class="subtitle">Ingresa para ayudar a reunir familias</p>
 
-      <form id="loginForm">
+      <form id="loginForm" class="auth-form">
+        <div class="auth-group">
+          <label for="cedula" class="auth-label">Cédula</label>
+          <input
+            type="text"
+            id="cedula"
+            class="auth-input"
+            placeholder="Ingresa tu cédula"
+            inputmode="numeric"
+            autocomplete="username"
+          >
+        </div>
 
-  <label>Correo electrónico</label>
-  <input type="email" id="email" placeholder="tu@email.com">
+        <div class="auth-group">
+          <label for="password" class="auth-label">Contraseña</label>
+          <div class="password-field">
+            <input
+              type="password"
+              id="password"
+              class="auth-input auth-input--password"
+              placeholder="••••••••"
+            >
+            <span id="togglePassword" class="toggle-eye">👁️</span>
+          </div>
+        </div>
 
-  <label>Contraseña</label>
-  <div class="password-field">
-    <input type="password" id="password" placeholder="********">
-    <span id="togglePassword">👁️</span>
-  </div>
+        <div id="message" class="message"></div>
 
-  <div id="message" class="message"></div>
-
-  <button type="submit" id="loginBtn">
-    Iniciar sesión
-  </button>
-
-</form>
-
+        <button type="submit" id="loginBtn" class="auth-btn-primary">
+          Iniciar sesión
+        </button>
+      </form>
 
       <div class="extra">
-        <a href="#">¿Olvidaste tu contraseña?</a>
-        <p class="register">
-       ¿No tienes cuenta?
-      <a href="index.html">Regístrate</a>
-  </p>
 
+        <a href="recover.html" class="auth-footer-link">¿Olvidaste tu contraseña?</a>
+        <p class="register">
+          ¿No tienes cuenta?
+          <a href="index.html" class="auth-footer-link">Regístrate</a>
+        </p>
       </div>
     </div>
-
   </div>
 
   <script src="js/login.js"></script>

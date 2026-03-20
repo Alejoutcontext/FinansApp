@@ -1,0 +1,102 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar contraseña | Vuelve a Casa</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/recover.css">
+</head>
+
+<body class="auth-bg">
+  <div class="auth-wrapper">
+    <div class="login-card">
+
+      <img src="assets/logo.png" alt="Vuelve a Casa" class="logo">
+      <h1 class="auth-title">Recuperar contraseña</h1>
+      <p class="subtitle">
+        Ingresa tu correo o teléfono registrado y te enviaremos un código
+      </p>
+
+      <!-- SELECTOR DE MÉTODO -->
+      <div class="method-tabs">
+        <button class="method-tab method-tab--active" data-method="email" id="tabEmail">
+          📧 Por correo
+        </button>
+        <button class="method-tab" data-method="phone" id="tabPhone">
+          📱 Por teléfono
+        </button>
+      </div>
+
+      <form id="recoverForm" class="auth-form" novalidate>
+
+        <!-- PANEL CORREO -->
+        <div id="panelEmail" class="method-panel">
+          <div class="auth-group">
+            <label for="recoverEmail" class="auth-label">
+              Correo electrónico <span class="required">*</span>
+            </label>
+            <input
+              type="email"
+              id="recoverEmail"
+              class="auth-input"
+              placeholder="juan@email.com"
+            >
+            <small class="help-text">
+              📧 Recibirás un código de 6 dígitos en tu correo
+            </small>
+          </div>
+        </div>
+
+        <!-- PANEL TELÉFONO -->
+        <div id="panelPhone" class="method-panel method-panel--hidden">
+          <div class="auth-group">
+            <label for="recoverPhone" class="auth-label">
+              Teléfono / WhatsApp <span class="required">*</span>
+            </label>
+            <div class="phone-wrap">
+              <select id="recoverPrefix" class="auth-select auth-select--prefix">
+                <option value="+57">🇨🇴 +57</option>
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+34">🇪🇸 +34</option>
+                <option value="+52">🇲🇽 +52</option>
+                <option value="+58">🇻🇪 +58</option>
+              </select>
+              <input
+                type="tel"
+                id="recoverPhone"
+                class="auth-input auth-input--phone"
+                placeholder="300 123 4567"
+                maxlength="15"
+              >
+            </div>
+            <small class="help-text">
+              📱 Recibirás un código por SMS o WhatsApp
+            </small>
+          </div>
+        </div>
+
+        <!-- MENSAJE -->
+        <div id="recoverMessage" class="message"></div>
+
+        <button type="submit" id="recoverBtn" class="auth-btn-primary">
+          Enviar código
+        </button>
+
+      </form>
+
+      <p class="register" style="margin-top:1.2rem;">
+        <a href="login.html" class="auth-footer-link">← Volver al inicio de sesión</a>
+      </p>
+
+    </div>
+  </div>
+
+  <script src="js/recover.js"></script>
+</body>
+</html>

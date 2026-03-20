@@ -1,36 +1,501 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard | Vuelve a Casa</title>
-  <link rel="stylesheet" href="/FinansApp/css/dashboard.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/dashboard.css">
 </head>
+
+
+
 <body>
 
-  <header class="topbar">
-    <div class="logo-area">
-      <img src="/FinansApp/assets/logo.png" alt="Logo" class="logo">
-      <h2>Vuelve a Casa</h2>
+  <!-- OVERLAY MÓVIL -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ══ MENÚ LATERAL ══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="assets/logo.png" alt="Logo" class="sidebar-logo">
+      <span class="sidebar-brand">Vuelve a Casa</span>
+      <button class="sidebar-close" id="sidebarClose">✕</button>
     </div>
 
-    <div class="user-area">
-      <span>Bienvenido</span>
-      <button id="logoutBtn">Cerrar sesión</button>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item nav-item--active" data-section="inicio">
+        <span class="nav-icon">🏠</span>
+        <span>Inicio</span>
+      </a>
+      <a href="#" class="nav-item" data-section="reportar">
+        <span class="nav-icon">🚨</span>
+        <span>Reportar caso</span>
+      </a>
+      <a href="#" class="nav-item" data-section="casos">
+        <span class="nav-icon">📋</span>
+        <span>Casos activos</span>
+        <span class="nav-badge" id="badgeCasos">0</span>
+      </a>
+      <a href="#" class="nav-item" data-section="encontrados">
+        <span class="nav-icon">💚</span>
+        <span>Encontrados</span>
+      </a>
+      <a href="#" class="nav-item" data-section="perfil">
+        <span class="nav-icon">👤</span>
+        <span>Mi perfil</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar" id="sidebarAvatar">?</div>
+      <div class="sidebar-user-info">
+        <strong id="sidebarName">Cargando...</strong>
+        <small id="sidebarDoc">--</small>
+      </div>
     </div>
-  </header>
+  </aside>
 
-  <main class="dashboard-content">
+  <!-- ══ CONTENIDO PRINCIPAL ══ -->
+  <div class="main-wrapper">
 
-    <h1>En desarrollo...</h1>
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" id="hamburgerBtn">☰</button>
+        <h2 class="topbar-title" id="topbarTitle">Panel principal</h2>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-user">
+          <span class="topbar-welcome">Hola, <strong id="welcomeName">...</strong></span>
+        </div>
+        <button id="logoutBtn" class="logout-btn">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <!-- ══ SECCIONES ══ -->
+    <main class="main-content">
+
+      <!-- ──────────────────────────────────────
+           SECCIÓN: INICIO
+      ────────────────────────────────────── -->
+      <section id="secInicio" class="section section--active">
+
+        <div class="alert alert--warning" id="alertVerificacion">
+          ⚠️ Tu cuenta aún no está verificada. Revisa tu correo para activarla.
+        </div>
+
+        <h1 class="section-title">Panel principal</h1>
+        <p class="section-subtitle" id="fechaHoy"></p>
+
+        <!-- TARJETAS ESTADÍSTICAS -->
+        <div class="stats-grid">
+          <div class="stat-card stat-card--blue">
+            <div class="stat-icon">🔍</div>
+            <div class="stat-info">
+              <span class="stat-label">Personas buscadas</span>
+              <span class="stat-number" id="statActivos">0</span>
+            </div>
+          </div>
+          <div class="stat-card stat-card--green">
+            <div class="stat-icon">💚</div>
+            <div class="stat-info">
+              <span class="stat-label">Encontradas</span>
+              <span class="stat-number" id="statEncontrados">0</span>
+            </div>
+          </div>
+          <div class="stat-card stat-card--orange">
+            <div class="stat-icon">📋</div>
+            <div class="stat-info">
+              <span class="stat-label">Mis reportes</span>
+              <span class="stat-number" id="statMisReportes">0</span>
+            </div>
+          </div>
+          <div class="stat-card stat-card--purple">
+            <div class="stat-icon">👥</div>
+            <div class="stat-info">
+              <span class="stat-label">Voluntarios activos</span>
+              <span class="stat-number" id="statVoluntarios">1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- REPORTES RECIENTES -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Reportes recientes</h3>
+            <a href="#" class="panel-link" data-section="reportar">+ Nuevo reporte</a>
+          </div>
+          <div id="listaRecientes" class="casos-lista">
+            <div class="empty-state">
+              <span class="empty-icon">📭</span>
+              <p>Aún no hay casos reportados.</p>
+              <button class="auth-btn-sm" data-section="reportar">Reportar el primero</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ──────────────────────────────────────
+           SECCIÓN: REPORTAR CASO
+      ────────────────────────────────────── -->
+      <section id="secReportar" class="section">
+        <h1 class="section-title">🚨 Reportar persona desaparecida</h1>
+        <p class="section-subtitle">Completa la información con el mayor detalle posible</p>
+
+        <div class="form-card">
+          <form id="reportForm" novalidate>
+            <div class="form-grid">
+
+              <!-- NOMBRE -->
+              <div class="form-group">
+                <label class="form-label">Nombre completo <span class="required">*</span></label>
+                <input type="text" id="rpNombre" class="form-input" placeholder="Nombre de la persona">
+              </div>
+
+              <!-- EDAD -->
+              <div class="form-group">
+                <label class="form-label">Edad aproximada <span class="required">*</span></label>
+                <input type="number" id="rpEdad" class="form-input" placeholder="Ej: 25" min="0" max="120">
+              </div>
+
+              <!-- GÉNERO -->
+              <div class="form-group">
+                <label class="form-label">Género</label>
+                <select id="rpGenero" class="form-select">
+                  <option value="">Selecciona...</option>
+                  <option value="masculino">Masculino</option>
+                  <option value="femenino">Femenino</option>
+                  <option value="otro">Otro / No especificado</option>
+                </select>
+              </div>
+
+              <!-- FECHA -->
+              <div class="form-group">
+                <label class="form-label">Fecha de desaparición <span class="required">*</span></label>
+                <input type="date" id="rpFecha" class="form-input">
+              </div>
+
+              <!-- FOTO -->
+              <div class="form-group form-group--full">
+                <label class="form-label">
+                  Foto de la persona <span class="required">*</span>
+                </label>
+                <div class="foto-upload" id="fotoUploadZone">
+                  <input
+                    type="file"
+                    id="rpFoto"
+                    accept="image/jpeg,image/png,image/webp"
+                    style="display:none"
+                  >
+                  <div class="foto-placeholder" id="fotoPlaceholder">
+                    <span class="foto-icon">📷</span>
+                    <p>Haz clic o arrastra una foto aquí</p>
+                    <small>JPG, PNG o WEBP • Máximo 3MB</small>
+                    <button type="button" class="btn-upload" id="btnSeleccionarFoto">
+                      Seleccionar foto
+                    </button>
+                  </div>
+                  <div class="foto-preview" id="fotoPreview" style="display:none">
+                    <img id="fotoImg" src="" alt="Foto de la persona">
+                    <button type="button" class="foto-remove" id="btnRemoverFoto">
+                      ✕ Cambiar foto
+                    </button>
+                    <button type="button" class="foto-remove" id="btnRecortarFoto" style="margin-left:.5rem;">
+                      ✂️ Recortar foto
+                    </button>
+                  </div>
+                </div>
+                <small id="fotoHelp" class="help-text help-text--error" style="display:none;">
+                  La foto es obligatoria para publicar el reporte.
+                </small>
+              </div>
+
+              <!-- UBICACIÓN -->
+              <div class="form-group form-group--full">
+                <label class="form-label">Última ubicación conocida <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="rpUbicacion"
+                  class="form-input"
+                  placeholder="Ej: Barranquilla, Atlántico - Barrio El Prado"
+                >
+              </div>
+
+              <!-- DESCRIPCIÓN -->
+              <div class="form-group form-group--full">
+                <label class="form-label">Descripción física</label>
+                <textarea
+                  id="rpDescripcion"
+                  class="form-textarea"
+                  rows="3"
+                  placeholder="Color de cabello, estatura, ropa que llevaba, señas particulares..."
+                ></textarea>
+              </div>
+
+              <div class="form-group form-group--full">
+                <label class="form-label">¿Cómo desapareció? <span class="required">*</span></label>
+                <textarea
+                  id="rpCircunstancias"
+                  class="form-textarea"
+                  rows="3"
+                  placeholder="Describe las circunstancias: cuándo fue visto por última vez, con quién estaba, qué estaba haciendo, si hay sospechosos..."
+                  ></textarea>
+              </div>
+
+              <!-- CONTACTO -->
+              <div class="form-group form-group--full">
+                <label class="form-label">Información de contacto del familiar</label>
+                <input
+                  type="text"
+                  id="rpContacto"
+                  class="form-input"
+                  placeholder="Teléfono o correo de contacto"
+                >
+              </div>
+
+            </div><!-- /form-grid -->
+
+            <div id="reportMessage" class="message" style="margin-top:.8rem;"></div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-secondary" data-section="inicio">Cancelar</button>
+              <button type="submit" class="btn-primary">🚨 Publicar reporte</button>
+            </div>
+
+          </form>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────
+           SECCIÓN: CASOS ACTIVOS
+      ────────────────────────────────────── -->
+      <section id="secCasos" class="section">
+        <div class="section-header">
+          <h1 class="section-title">📋 Casos activos</h1>
+          <button class="btn-primary" data-section="reportar">+ Nuevo reporte</button>
+        </div>
+
+        <div class="search-bar">
+          <input
+            type="text"
+            id="searchInput"
+            class="form-input"
+            placeholder="🔍 Buscar por nombre o ubicación..."
+          >
+        </div>
+
+        <div id="listaCasos" class="casos-grid">
+          <div class="empty-state">
+            <span class="empty-icon">📭</span>
+            <p>No hay casos activos aún.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────
+           SECCIÓN: ENCONTRADOS
+      ────────────────────────────────────── -->
+      <section id="secEncontrados" class="section">
+        <h1 class="section-title">💚 Personas encontradas</h1>
+        <div id="listaEncontrados" class="casos-grid">
+          <div class="empty-state">
+            <span class="empty-icon">💚</span>
+            <p>Aún no hay personas marcadas como encontradas.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────
+           SECCIÓN: PERFIL
+      ────────────────────────────────────── -->
+      <section id="secPerfil" class="section">
+        <h1 class="section-title">👤 Mi perfil</h1>
+
+        <div class="profile-card">
+
+          <!-- FOTO + CAMBIAR -->
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar-ring">
+              <img id="profileAvatarImg" src="" alt="Foto de perfil" class="profile-avatar-img" style="display:none;">
+              <div class="profile-avatar" id="profileAvatar">?</div>
+            </div>
+            <button type="button" class="profile-change-photo" id="btnCambiarFotoPerfil">
+              📷 Cambiar foto
+            </button>
+            <input type="file" id="inputFotoPerfil" accept="image/jpeg,image/png,image/webp" style="display:none;">
+          </div>
+
+          <!-- INFO MODO VER -->
+          <div class="profile-info" id="profileViewMode">
+            <h2 id="profileName">--</h2>
+            <p id="profileDoc"   class="profile-doc">--</p>
+            <p id="profileEmail" class="profile-meta">📧 --</p>
+            <p id="profilePhone" class="profile-meta">📱 --</p>
+            <p id="profileDate"  class="profile-meta">📅 Registrado el --</p>
+
+            <!-- ✅ Ciudad y bio -->
+            <p id="profileCity" class="profile-city" style="display:none;"></p>
+            <p id="profileBio"  class="profile-bio"  style="display:none;"></p>
+
+            <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;">
+              <span id="profileRole"       class="profile-badge">usuario</span>
+              <span id="profileVerificado" class="profile-badge profile-badge--warning">No verificado</span>
+            </div>
+            <button type="button" class="btn-primary profile-edit-btn" id="btnEditarPerfil">
+              ✏️ Editar perfil
+            </button>
+          </div>
+        
+          <!-- FORMULARIO EDICIÓN -->
+          <div class="profile-info profile-edit-form" id="profileEditMode" style="display:none;">
+            <h3 style="margin:0 0 1rem;">✏️ Editar información</h3>
+
+            <div class="form-group" style="margin-bottom:.75rem;">
+              <label class="form-label">Nombre completo</label>
+              <input type="text" id="editName" class="form-input" placeholder="Tu nombre completo">
+            </div>
+
+            <div class="form-group" style="margin-bottom:.75rem;">
+              <label class="form-label">Correo electrónico</label>
+              <input type="email" id="editEmail" class="form-input" placeholder="tu@correo.com">
+            </div>
+
+            <div class="form-group" style="margin-bottom:.75rem;">
+              <label class="form-label">Teléfono / WhatsApp</label>
+              <div style="display:flex;gap:.5rem;">
+                <select id="editPhonePrefix" class="form-select" style="width:120px;flex-shrink:0;">
+                  <option value="+57">🇨🇴 +57</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+34">🇪🇸 +34</option>
+                  <option value="+52">🇲🇽 +52</option>
+                  <option value="+58">🇻🇪 +58</option>
+                </select>
+                <input type="tel" id="editPhone" class="form-input" placeholder="300 123 4567">
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom:.75rem;">
+              <label class="form-label">Ciudad</label>
+              <input type="text" id="editCity" class="form-input" placeholder="Ej: Barranquilla">
+            </div>
+
+            <div class="form-group" style="margin-bottom:.75rem;">
+              <label class="form-label">Sobre mí</label>
+              <textarea id="editBio" class="form-textarea" rows="2"
+                placeholder="Cuéntanos un poco sobre ti o tu rol en la comunidad..."></textarea>
+            </div>
+
+            <div class="form-group" style="margin-bottom:1rem;">
+              <label class="form-label">
+                Nueva contraseña
+                <span style="color:#9ca3af;font-weight:400;">(opcional)</span>
+              </label>
+              <div class="password-field">
+                <input
+                  type="password"
+                  id="editPassword"
+                  class="form-input auth-input--password"
+                  placeholder="Mínimo 6 caracteres"
+                >
+                <span class="toggle-eye">👁️</span>
+              </div>
+              <small id="editPassStrength" class="help-text"></small>
+            </div>
+
+            <div id="editMessage" class="message" style="margin-bottom:.75rem;"></div>
+
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+              <button type="button" class="btn-primary"   id="btnGuardarPerfil">💾 Guardar cambios</button>
+              <button type="button" class="btn-secondary" id="btnCancelarEdicion">Cancelar</button>
+            </div>
+          </div>
+
+        </div><!-- /profile-card -->
+
+        <!-- STATS PERSONALES -->
+        <div class="stats-grid" style="margin-top:1.2rem;">
+          <div class="stat-card stat-card--blue">
+            <div class="stat-icon">📋</div>
+            <div class="stat-info">
+              <span class="stat-label">Mis reportes</span>
+              <span class="stat-number" id="profileStatReportes">0</span>
+            </div>
+          </div>
+          <div class="stat-card stat-card--green">
+            <div class="stat-icon">✅</div>
+            <div class="stat-info">
+              <span class="stat-label">Casos encontrados</span>
+              <span class="stat-number" id="profileStatEncontrados">0</span>
+            </div>
+          </div>
+          <div class="stat-card stat-card--orange">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-info">
+              <span class="stat-label">Pendientes</span>
+              <span class="stat-number" id="profileStatPendientes">0</span>
+            </div>
+          </div>
+          <div class="stat-card stat-card--purple">
+            <div class="stat-icon">💬</div>
+            <div class="stat-info">
+              <span class="stat-label">Comentarios</span>
+              <span class="stat-number" id="profileStatComentarios">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MIS REPORTES -->
+        <div class="panel" style="margin-top:1.2rem;">
+          <div class="panel-header">
+            <h3>Mis reportes publicados</h3>
+            <a href="#" class="panel-link" data-section="reportar">+ Nuevo reporte</a>
+          </div>
+          <div id="misReportes" class="casos-lista">
+            <div class="empty-state">
+              <span class="empty-icon">📭</span>
+              <p>No has publicado reportes aún.</p>
+            </div>
+          </div>
+        </div>
+
+      <!-- CASOS SEGUIDOS SOLO EN PERFIL -->
+      <div class="panel" style="margin-top:1.2rem;">
+        <div class="panel-header">
+          <h3>🔔 Casos que sigo</h3>
+          <span style="font-size:.82rem;color:#6b7280;" id="countCasosSeguidos">0 casos</span>
+        </div>
+        <div id="misCasosSeguidos" class="casos-lista">
+          <div class="empty-state">
+            <span class="empty-icon">🔔</span>
+            <p>No sigues ningún caso aún.</p>
+            <small>Abre un caso y haz clic en "Seguir" para recibir notificaciones.</small>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
-  </main>
+      <!-- ──────────────────────────────────────
+           SECCIÓN: ADMIN
+      ────────────────────────────────────── -->
+      <section id="secAdmin" class="section">
+        <!-- Se renderiza dinámicamente con JS -->
+      </section>
 
-  <script>
-    document.getElementById("logoutBtn").addEventListener("click", function(){
-      window.location.href = "/FinansApp/login.html";
-    });
-  </script>
+    </main>
+  </div><!-- /main-wrapper -->
+
+  <script src="js/image-cropper.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/notifications.js"></script>
 
 </body>
 </html>
+
+

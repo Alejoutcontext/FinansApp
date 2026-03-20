@@ -1,0 +1,101 @@
+/* TABS DE MÉTODO */
+.method-tabs {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: 1.5rem;
+  background: rgba(255,255,255,0.1);
+  padding: .35rem;
+  border-radius: 14px;
+}
+
+.method-tab {
+  flex: 1;
+  padding: .6rem .5rem;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(154, 152, 152, 0.7);
+  font-size: .85rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.method-tab--active {
+  background: rgba(255,255,255,0.2);
+  color: #6e6e6e;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.method-panel--hidden { display: none; }
+
+/* INPUTS CÓDIGO 6 DÍGITOS */
+.code-inputs {
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  margin: .5rem 0;
+}
+
+.code-digit {
+  width: 48px;
+  height: 56px;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+  transition: all .15s ease;
+  font-family: inherit;
+}
+
+.code-digit:focus {
+  outline: none;
+  border-color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.2);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.15);
+}
+
+/* SHAKE al error */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-8px); }
+  40%       { transform: translateX(8px); }
+  60%       { transform: translateX(-5px); }
+  80%       { transform: translateX(5px); }
+}
+
+.shake { animation: shake .4s ease; }
+
+/* REENVIAR CÓDIGO */
+.resend-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  font-size: .8rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: .8rem;
+}
+
+.resend-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: .8rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.resend-btn:disabled {
+  color: rgba(255,255,255,0.4);
+  cursor: not-allowed;
+}
+
+.resend-btn:not(:disabled):hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caso | Vuelve a Casa</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/case-detail.css">
+</head>
+<body>
+  <main class="case-page">
+
+    <header class="case-top">
+      <a href="dashboard.html" class="back-link">← Volver al inicio</a>
+      <h1 class="case-title-main">Detalle del caso</h1>
+    </header>
+
+    <!-- CARD DEL CASO -->
+    <section id="caseDetailCard" class="case-card">
+      <div class="case-media">
+        <img id="caseFoto" src="" alt="Foto del caso">
+      </div>
+      <div class="case-content">
+
+        <div class="case-header">
+          <h2 id="caseNombre">Cargando...</h2>
+          <span id="caseEstado" class="estado-badge">--</span>
+        </div>
+
+        <p id="caseMeta"        class="case-meta">--</p>
+        <p id="caseDescripcion" class="case-desc">--</p>
+
+        <div class="case-grid">
+          <div><strong>Ubicación:</strong>    <span id="caseUbicacion">--</span></div>
+          <div><strong>Fecha:</strong>         <span id="caseFecha">--</span></div>
+          <div><strong>Contacto:</strong>      <span id="caseContacto">--</span></div>
+          <div><strong>Reportado por:</strong> <span id="caseAutor">--</span></div>
+          <div><strong>Publicado:</strong>     <span id="caseFechaReporte">--</span></div>
+          <div style="grid-column:1/-1;">
+          <strong>¿Cómo desapareció?</strong>
+          <p id="caseCircunstancias" style="margin:.3rem 0 0;color:#374151;">--</p>
+          </div>
+
+        </div>
+
+        <!-- SEGUIR CASO -->
+        <div class="case-follow-row" id="caseFollowRow">
+          <button type="button" class="btn-follow" id="btnSeguirCaso">
+            🔔 Seguir este caso
+          </button>
+          <span class="follow-count">
+            <span id="followCount">0</span> persona(s) siguiendo
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FORO -->
+    <section class="forum-card">
+      <div class="forum-header">
+        <h3>Foro del caso</h3>
+        <span id="forumCount" class="forum-count">0 comentarios</span>
+      </div>
+
+      <form id="forumForm" class="forum-form">
+        <textarea
+          id="forumText"
+          maxlength="800"
+          placeholder="Escribe información, pistas o mensajes de apoyo para este caso..."
+        ></textarea>
+        <div class="forum-form-row">
+          <label class="file-label" for="forumImage">Adjuntar evidencia (imagen)</label>
+          <input type="file" id="forumImage" accept="image/jpeg,image/png,image/webp">
+          <button type="button" id="forumCropBtn" class="forum-crop-btn">✂️ Recortar</button>
+        </div>
+        <img
+          id="forumPreview"
+          class="forum-image forum-image--preview"
+          src=""
+          alt="Vista previa de evidencia"
+          style="display:none;"
+        >
+        <button type="submit">Publicar comentario</button>
+      </form>
+
+      <div id="forumList" class="forum-list">
+        <p class="empty-forum">Aún no hay comentarios para este caso.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/image-cropper.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/case-detail.js"></script>
+
+</body>
+</html>
